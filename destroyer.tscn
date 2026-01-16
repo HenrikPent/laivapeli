@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgxllyo3f1ga7"]
+
+[ext_resource type="Script" uid="uid://5u1itftgs4vk" path="res://destroyerControls.gd" id="1_r32ba"]
+[ext_resource type="Script" uid="uid://jebchwihfh57" path="res://turret.gd" id="2_2avu4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e75um"]
+size = Vector3(7, 5, 32)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r32ba"]
+albedo_color = Color(0.09364096, 0.1025045, 0.09902587, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e75um"]
+size = Vector3(7, 5, 32)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_r32ba"]
+top_radius = 1.3
+bottom_radius = 2.0
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2avu4"]
+albedo_color = Color(0.09411765, 0.101960786, 0.09803922, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8ircu"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtegk"]
+albedo_color = Color(0.09411765, 0.101960786, 0.09803922, 1)
+
+[node name="Destroyer" type="RigidBody3D"]
+script = ExtResource("1_r32ba")
+
+[node name="Hullmesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_e75um")
+surface_material_override/0 = SubResource("StandardMaterial3D_r32ba")
+
+[node name="HullCollider" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_e75um")
+
+[node name="Turret" type="Node3D" parent="." node_paths=PackedStringArray("barrel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 9)
+script = ExtResource("2_2avu4")
+barrel = NodePath("Gun")
+
+[node name="TurretMesh" type="MeshInstance3D" parent="Turret"]
+mesh = SubResource("CylinderMesh_r32ba")
+surface_material_override/0 = SubResource("StandardMaterial3D_2avu4")
+
+[node name="Gun" type="Node3D" parent="Turret"]
+
+[node name="BarrelMesh" type="MeshInstance3D" parent="Turret/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_8ircu")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_gtegk")
+
+[node name="BarrelMesh2" type="MeshInstance3D" parent="Turret/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_8ircu")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_gtegk")

@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://ckavqb25bdaul"]
+
+[ext_resource type="PackedScene" uid="uid://dgxllyo3f1ga7" path="res://destroyer.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://dl6ya8r8co425" path="res://island_prototype.tscn" id="3_tlwt5"]
+[ext_resource type="Script" uid="uid://b5yeq618aqw1b" path="res://UI_script.gd" id="4_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://c1bhof76b8fsf" path="res://crosshair.svg" id="5_036b0"]
+[ext_resource type="Script" uid="uid://bn72p8w1usweq" path="res://AimPoint.gd" id="5_dwbse"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gv5m4"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3sb7"]
+transparency = 1
+albedo_color = Color(0, 0.21960784, 0.5058824, 0.7019608)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_036b0"]
+size = Vector3(1000, 0.1, 1000)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 23.210396, 20.192057, 45.57708)
+
+[node name="Ocean" type="Node3D" parent="."]
+
+[node name="Ocean(MeshInstance3D)" type="MeshInstance3D" parent="Ocean"]
+mesh = SubResource("PlaneMesh_gv5m4")
+surface_material_override/0 = SubResource("StandardMaterial3D_f3sb7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ocean"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ocean/StaticBody3D"]
+shape = SubResource("BoxShape3D_036b0")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("4_aqk2v")
+
+[node name="PauseMenu" type="Panel" parent="UI"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Resume" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "RESUME"
+
+[node name="Quit" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -41.0
+offset_right = 761.0
+offset_bottom = 759.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_036b0")
+
+[node name="cameraRig(Node3D)" type="Node3D" parent="." node_paths=PackedStringArray("active_boat")]
+script = ExtResource("5_dwbse")
+active_boat = NodePath("../Destroyer")
+max_distance = 1000.0
+
+[node name="Camera3D" type="Camera3D" parent="cameraRig(Node3D)"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
+
+[node name="Island" parent="." instance=ExtResource("3_tlwt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.994953, 0, 196.41551)
+
+[node name="Destroyer" parent="." instance=ExtResource("1_f3sb7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Resume" to="UI" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Resume" to="UI" method="resume_game"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Quit" to="UI" method="_on_Quit_pressed"]
