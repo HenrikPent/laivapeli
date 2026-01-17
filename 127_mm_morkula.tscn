@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv81wxit7xwf3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q4ivy"]
+radius = 0.075
+
+[node name="127mm_morkula" type="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_q4ivy")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]

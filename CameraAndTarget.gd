@@ -1,3 +1,5 @@
+#Tää ohjaa kameraa ja kattoo samalla mihin pelaaja tähtää
+
 extends Node3D
 
 @export var active_boat : Node3D = null

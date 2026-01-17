@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bju37gyin2fxj"]
+[gd_scene load_steps=11 format=3 uid="uid://bju37gyin2fxj"]
 
 [ext_resource type="PackedScene" uid="uid://cxmuccgmtw6c6" path="res://blenderhull.glb" id="2_fjj7y"]
 [ext_resource type="Script" uid="uid://5u1itftgs4vk" path="res://destroyerControls.gd" id="2_l8smc"]
 [ext_resource type="PackedScene" uid="uid://bt5v0writo0qm" path="res://destroyer turret.glb" id="3_l8smc"]
 [ext_resource type="Script" uid="uid://jebchwihfh57" path="res://turret.gd" id="4_dwabi"]
+[ext_resource type="Script" uid="uid://q7tbxvmnl28a" path="res://Shoot127mm.gd" id="5_l8smc"]
+[ext_resource type="PackedScene" uid="uid://bfpriskybo8jk" path="res://projectile.tscn" id="6_2wa6i"]
+[ext_resource type="PackedScene" uid="uid://cseul83jry2lf" path="res://muzzle_flash.tscn" id="7_dwabi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2wa6i"]
 size = Vector3(20, 20, 147)
@@ -20,13 +23,14 @@ albedo_color = Color(0.09411765, 0.101960786, 0.09803922, 1)
 script = ExtResource("2_l8smc")
 
 [node name="blenderhull2" parent="." instance=ExtResource("2_fjj7y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.8326836, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.92812, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.095436, 0)
 shape = SubResource("BoxShape3D_2wa6i")
 
 [node name="Turret1" parent="." node_paths=PackedStringArray("barrel") instance=ExtResource("3_l8smc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.9823265, -25.72832)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.149643, -25.72832)
 script = ExtResource("4_dwabi")
 barrel = NodePath("Gun")
 
@@ -45,8 +49,18 @@ mesh = SubResource("CylinderMesh_dwabi")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
 
+[node name="Muzzle1" type="Node3D" parent="Turret1/Gun" node_paths=PackedStringArray("muzzle", "muzzle_flash")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.30000058, 0, 10.728868)
+script = ExtResource("5_l8smc")
+projectile_scene = ExtResource("6_2wa6i")
+muzzle = NodePath(".")
+muzzle_flash = NodePath("MuzzleFlash")
+
+[node name="MuzzleFlash" parent="Turret1/Gun/Muzzle1" instance=ExtResource("7_dwabi")]
+sub_emitter = NodePath(".")
+
 [node name="Turret2" parent="." node_paths=PackedStringArray("barrel") instance=ExtResource("3_l8smc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.9823265, 48.976555)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.149643, 48.976555)
 script = ExtResource("4_dwabi")
 barrel = NodePath("Gun")
 
@@ -66,7 +80,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
 
 [node name="Turret3" parent="." node_paths=PackedStringArray("barrel") instance=ExtResource("3_l8smc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.895748, 67.90741)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.0630646, 67.90741)
 script = ExtResource("4_dwabi")
 barrel = NodePath("Gun")
 
@@ -86,7 +100,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
 
 [node name="Turret4" parent="." node_paths=PackedStringArray("barrel") instance=ExtResource("3_l8smc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.320986, -55.80165)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.488302, -55.80165)
 script = ExtResource("4_dwabi")
 barrel = NodePath("Gun")
 

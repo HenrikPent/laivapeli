@@ -1,7 +1,7 @@
 extends Node3D
 
-@export var speed := 15.0
-@export var turn_speed := 60.0  # degrees per second
+@export var speed := 25.0
+@export var turn_speed := 10.0  # degrees per second
 @export var water_level := 0.0  # veneen Y-asema veden pinnassa
 @export var camera_offset := Vector3(0, 40, -10)  # oletusoffset
 

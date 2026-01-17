@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr1kg81rhverf"]
+
+[sub_resource type="Gradient" id="Gradient_4xowi"]
+offsets = PackedFloat32Array(0, 0.14983714, 0.86970687, 1)
+colors = PackedColorArray(0.8235294, 0.44705883, 0, 0, 0.8216491, 0.44598448, 5.7756904e-07, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a202f"]
+gradient = SubResource("Gradient_4xowi")
+height = 256
+fill_from = Vector2(0.5, 0.99572647)
+fill_to = Vector2(0.517094, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("GradientTexture2D_a202f")
+emission_enabled = true
+emission_texture = SubResource("GradientTexture2D_a202f")
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_a0tk4"]
+material = SubResource("StandardMaterial3D_noarx")
+sections = 2
+section_length = 10.0
+section_segments = 1
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, -10.034179)
+mesh = SubResource("RibbonTrailMesh_a0tk4")

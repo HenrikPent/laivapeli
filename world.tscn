@@ -34,6 +34,19 @@ surface_material_override/0 = SubResource("StandardMaterial3D_f3sb7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ocean/StaticBody3D"]
 shape = SubResource("BoxShape3D_036b0")
 
+[node name="cameraRig(Node3D)" type="Node3D" parent="." node_paths=PackedStringArray("active_boat")]
+script = ExtResource("5_dwbse")
+active_boat = NodePath("../DestroyerV2")
+max_distance = 1000.0
+
+[node name="Camera3D" type="Camera3D" parent="cameraRig(Node3D)"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
+
+[node name="Island" parent="." instance=ExtResource("3_tlwt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.994953, 0, 196.41551)
+
+[node name="DestroyerV2" parent="." instance=ExtResource("6_dwbse")]
+
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("4_aqk2v")
 
@@ -69,20 +82,6 @@ grow_vertical = 2
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_036b0")
 
-[node name="cameraRig(Node3D)" type="Node3D" parent="." node_paths=PackedStringArray("active_boat")]
-script = ExtResource("5_dwbse")
-active_boat = NodePath("../Node3D")
-max_distance = 1000.0
-
-[node name="Camera3D" type="Camera3D" parent="cameraRig(Node3D)"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
-
-[node name="Island" parent="." instance=ExtResource("3_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.994953, 0, 196.41551)
-
-[node name="Node3D" parent="." instance=ExtResource("6_dwbse")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47, 0, 0)
-
-[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Resume" to="UI" method="_on_resume_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Resume" to="UI" method="resume_game"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Resume" to="UI" method="_on_resume_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Quit" to="UI" method="_on_Quit_pressed"]
