@@ -28,7 +28,7 @@ func _unhandled_input(event):
 			distance += zoom_speed
 		distance = clamp(distance, min_distance, max_distance)
 
-func _process(delta):
+func _process(_delta):
 	if not active_boat:
 		return
 

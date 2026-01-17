@@ -1,0 +1,106 @@
+[gd_scene load_steps=8 format=3 uid="uid://bju37gyin2fxj"]
+
+[ext_resource type="PackedScene" uid="uid://cxmuccgmtw6c6" path="res://blenderhull.glb" id="2_fjj7y"]
+[ext_resource type="Script" uid="uid://5u1itftgs4vk" path="res://destroyerControls.gd" id="2_l8smc"]
+[ext_resource type="PackedScene" uid="uid://bt5v0writo0qm" path="res://destroyer turret.glb" id="3_l8smc"]
+[ext_resource type="Script" uid="uid://jebchwihfh57" path="res://turret.gd" id="4_dwabi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2wa6i"]
+size = Vector3(20, 20, 147)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dwabi"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vm5fj"]
+albedo_color = Color(0.09411765, 0.101960786, 0.09803922, 1)
+
+[node name="DestroyerV2" type="RigidBody3D"]
+script = ExtResource("2_l8smc")
+
+[node name="blenderhull2" parent="." instance=ExtResource("2_fjj7y")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.92812, 0)
+shape = SubResource("BoxShape3D_2wa6i")
+
+[node name="Turret1" parent="." node_paths=PackedStringArray("barrel") instance=ExtResource("3_l8smc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.9823265, -25.72832)
+script = ExtResource("4_dwabi")
+barrel = NodePath("Gun")
+
+[node name="Gun" type="Node3D" parent="Turret1"]
+transform = Transform3D(-5, 0, -3.774895e-07, 0, 5, 0, 7.54979e-07, 0, -2.5, 0, 3.8388386, 0.01875496)
+
+[node name="BarrelMesh" type="MeshInstance3D" parent="Turret1/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_dwabi")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
+
+[node name="BarrelMesh2" type="MeshInstance3D" parent="Turret1/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_dwabi")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
+
+[node name="Turret2" parent="." node_paths=PackedStringArray("barrel") instance=ExtResource("3_l8smc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.9823265, 48.976555)
+script = ExtResource("4_dwabi")
+barrel = NodePath("Gun")
+
+[node name="Gun" type="Node3D" parent="Turret2"]
+transform = Transform3D(-5, 0, -3.774895e-07, 0, 5, 0, 7.54979e-07, 0, -2.5, 0, 3.8388386, 0.01875496)
+
+[node name="BarrelMesh" type="MeshInstance3D" parent="Turret2/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_dwabi")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
+
+[node name="BarrelMesh2" type="MeshInstance3D" parent="Turret2/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_dwabi")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
+
+[node name="Turret3" parent="." node_paths=PackedStringArray("barrel") instance=ExtResource("3_l8smc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.895748, 67.90741)
+script = ExtResource("4_dwabi")
+barrel = NodePath("Gun")
+
+[node name="Gun" type="Node3D" parent="Turret3"]
+transform = Transform3D(-5, 0, -3.774895e-07, 0, 5, 0, 7.54979e-07, 0, -2.5, 0, 3.8388386, 0.01875496)
+
+[node name="BarrelMesh" type="MeshInstance3D" parent="Turret3/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_dwabi")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
+
+[node name="BarrelMesh2" type="MeshInstance3D" parent="Turret3/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_dwabi")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
+
+[node name="Turret4" parent="." node_paths=PackedStringArray("barrel") instance=ExtResource("3_l8smc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.320986, -55.80165)
+script = ExtResource("4_dwabi")
+barrel = NodePath("Gun")
+
+[node name="Gun" type="Node3D" parent="Turret4"]
+transform = Transform3D(-5, 0, -3.774895e-07, 0, 5, 0, 7.54979e-07, 0, -2.5, 0, 3.8388386, 0.01875496)
+
+[node name="BarrelMesh" type="MeshInstance3D" parent="Turret4/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_dwabi")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")
+
+[node name="BarrelMesh2" type="MeshInstance3D" parent="Turret4/Gun"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.3, 0, 3.105)
+mesh = SubResource("CylinderMesh_dwabi")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vm5fj")

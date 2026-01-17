@@ -3,7 +3,7 @@ extends Node3D
 @export var speed := 15.0
 @export var turn_speed := 60.0  # degrees per second
 @export var water_level := 0.0  # veneen Y-asema veden pinnassa
-@export var camera_offset := Vector3(0, 5, -10)  # oletusoffset
+@export var camera_offset := Vector3(0, 40, -10)  # oletusoffset
 
 func _process(delta):
 	# Eteen/taakse -1..1

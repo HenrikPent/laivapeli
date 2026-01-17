@@ -23,7 +23,7 @@ func _process(_delta):
 	base_pitch = -base_pitch  # käännetään merkki Godotissa ylös/alas
 
 	# 2️⃣ Lisäkulma etäisyyden mukaan
-	var max_distance_for_pitch = 100.0      # kovakoodattu etäisyys maksimikulmalle
+	var max_distance_for_pitch = 500.0      # kovakoodattu etäisyys maksimikulmalle
 	var max_extra_pitch_deg = -40.0          # kuinka paljon ylimääräistä kulmaa lisätään
 	var distance_to_target = barrel_global.distance_to(target_pos)
 	
@@ -40,6 +40,6 @@ func _process(_delta):
 	barrel.rotation.x = clamp(barrel.rotation.x, deg_to_rad(down_max_pitch), deg_to_rad(up_max_pitch))
 
 	# Yaw lasketaan normaalisti
-	var desired_yaw = atan2(dir.x, dir.z)
+	var desired_yaw = atan2(-dir.x, -dir.z)
 	var yaw_diff = wrapf(desired_yaw - global_rotation.y, -PI, PI)
 	global_rotation.y += clamp(yaw_diff, -deg_to_rad(yaw_speed * _delta), deg_to_rad(yaw_speed * _delta))
